@@ -1,3 +1,7 @@
+# Refactored GildedRose Kata Code
+Now different types of goods are separated with switch case 
+Unit tests have been added for automated testing process
+
 # GildedRose Kata - PHP Version
 
 See the [top level readme](../README.md) for general information about this exercise. This is the PHP version of the
