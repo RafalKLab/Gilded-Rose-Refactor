@@ -182,32 +182,82 @@ class GildedRoseTest extends TestCase
 
     public function test_casual_item_before_dell_in_date(): void
     {
-        $items = [new Item('basic', 10, 10)];
+        $items = [new Item('casual', 10, 10)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertSame(9, $items[0]->quality);
         $this->assertSame(9, $items[0]->sell_in);
-        $this->assertSame('basic', $items[0]->name);
+        $this->assertSame('casual', $items[0]->name);
     }
 
     public function test_casual_item_on_sell_in_date(): void
     {
-        $items = [new Item('basic', 0, 10)];
+        $items = [new Item('casual', 0, 10)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertSame(8, $items[0]->quality);
         $this->assertSame(-1, $items[0]->sell_in);
-        $this->assertSame('basic', $items[0]->name);
+        $this->assertSame('casual', $items[0]->name);
     }
 
     public function test_casual_item_after_sell_in_date(): void
     {
-        $items = [new Item('basic', -5, 10)];
+        $items = [new Item('casual', -5, 10)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertSame(8, $items[0]->quality);
         $this->assertSame(-6, $items[0]->sell_in);
-        $this->assertSame('basic', $items[0]->name);
+        $this->assertSame('casual', $items[0]->name);
+    }
+
+    public function test_casual_after_sell_in_date_quality_not_negative(): void
+    {
+        $items = [new Item('casual', -4, 1)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(0, $items[0]->quality);
+        $this->assertSame(-5, $items[0]->sell_in);
+        $this->assertSame('casual', $items[0]->name);
+    }
+
+    public function test_conjured_before_sell_in_date(): void
+    {
+        $items = [new Item('Conjured', 10, 10)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(8, $items[0]->quality);
+        $this->assertSame(9, $items[0]->sell_in);
+        $this->assertSame('Conjured', $items[0]->name);
+    }
+
+    public function test_conjured_on_sell_in_date(): void
+    {
+        $items = [new Item('Conjured', 0, 10)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(6, $items[0]->quality);
+        $this->assertSame(-1, $items[0]->sell_in);
+        $this->assertSame('Conjured', $items[0]->name);
+    }
+
+    public function test_conjured_after_sell_in_date(): void
+    {
+        $items = [new Item('Conjured', -4, 10)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(6, $items[0]->quality);
+        $this->assertSame(-5, $items[0]->sell_in);
+        $this->assertSame('Conjured', $items[0]->name);
+    }
+
+    public function test_conjured_after_sell_in_date_quality_not_negative(): void
+    {
+        $items = [new Item('Conjured', -4, 1)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(0, $items[0]->quality);
+        $this->assertSame(-5, $items[0]->sell_in);
+        $this->assertSame('Conjured', $items[0]->name);
     }
 
 }
