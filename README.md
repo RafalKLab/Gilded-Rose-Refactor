@@ -1,5 +1,5 @@
 # Refactored GildedRose Kata Code
-Now different types of goods are separated with switch case 
+Now different types of goods are separated with switch case   
 Unit tests have been added for automated testing process
 
 ## Installation
